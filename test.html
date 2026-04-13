@@ -1,11 +1,11 @@
-<input onclick="start()" type="button" value="Click here" />
-
+<html>
+<button id="btn">Enter fullscreen</button>
 <script>
-  function start(){
-   var recognition = new webkitSpeechRecognition();
-  recognition.start();
-  navigator.webkitGetUserMedia({audio: true}, function(){}, function(){});
-  document.location = "https://www.evil.com"
-  }
-
-  </script>
+document.getElementById("btn").onclick = function() {
+  document.body.webkitRequestFullScreen(function(){});
+  setTimeout(function() {
+    alert(0);
+  }, 100);
+}
+</script>
+</html>
