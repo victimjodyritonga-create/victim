@@ -1,13 +1,23 @@
-<html>
-<body>
-<a href="" target="_blank" onclick=clickme();>visit ianfette</a>
-<script>
-function clickme()
-{
-w1 = window.open('http://google.com');
-p = w1.prompt("Enter your password to proceed");
-alert(p);
-}
-</script>
-</body>
-</html>
+ <iframe
+    style="width:420px;height:260px;border:0"
+    srcdoc='<!doctype html>
+    <html>
+      <body style="margin:0;display:grid;place-items:center;height:100vh;font-family:sans-serif;background:#f3f3f3">
+        <button id="btn" style="padding:16px 24px;font-size:20px;cursor:pointer">Click to open PiP</button>
+        <script>
+          document.getElementById("btn").addEventListener("click", async () => {
+            if (!top.documentPictureInPicture) return;
+
+            const pip = await top.documentPictureInPicture.requestWindow({
+              width: 400,
+              height: 300
+            });
+
+            pip.document.body.style.margin = "0";
+            pip.document.body.innerHTML =
+              "<div style=\"height:100vh;display:grid;place-items:center;font:24px sans-serif;background:#fff\">PiP window</div>";
+          });
+        </script>
+      </body>
+    </html>'>
+  </iframe>
