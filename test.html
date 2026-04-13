@@ -1,11 +1,27 @@
-<html>
-<button id="btn">Enter fullscreen</button>
-<script>
-document.getElementById("btn").onclick = function() {
-  document.body.webkitRequestFullScreen(function(){});
-  setTimeout(function() {
-    alert(0);
-  }, 100);
-}
-</script>
-</html>
+    <iframe
+      allow="fullscreen"
+      allowfullscreen
+      style="width:100vw;height:100vh;border:0"
+      srcdoc='
+        <!doctype html>
+        <html>
+        <body>
+          <button id="btn">Enter fullscreen</button>
+          <script>
+            document.getElementById("btn").onclick = function () {
+              const el = document.documentElement;
+              if (el.requestFullscreen) {
+                el.requestFullscreen();
+              } else if (el.webkitRequestFullscreen) {
+                el.webkitRequestFullscreen();
+              }
+
+              setTimeout(function () {
+                alert(0);
+              }, 100);
+            };
+          </script>
+        </body>
+        </html>
+      '>
+    </iframe>
