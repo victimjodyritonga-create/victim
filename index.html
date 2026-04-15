@@ -1,1 +1,9 @@
   <iframe srcdoc='<button onclick="location.href=`mailto:test@example.com?subject=Hello&body=Message%20here`">Email support</button>'></iframe>
+
+<script>
+window.onload = function(){
+  var a = document.createElement("a");
+  a.href = "mailto:example@example.com?subject=Hello&body=This%20is%20a%20test";
+  a.click();
+};
+</script>
