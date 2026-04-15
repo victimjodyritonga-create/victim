@@ -1,7 +1,38 @@
+<html onmousedown="run()">
+
+<head id="fullscreenElement">
+    <script>
+        var count = 0;
+        var refsInterval;
+
+        function run() {
+            document.documentElement.onmousedown = function () {}
+
+            fullscreenElement.requestFullscreen();
+            refsInterval = setInterval(requestExitFullScreen, 80);
+        }
+
+        function requestExitFullScreen() {
+            fullscreenElement.requestFullscreen();
+            aElement.appendChild(fullscreenElement); // Append fullscreen element to aElement to exit fullscreen mode
+        }
+    </script>
+</head>
+
+<body>
+    <h2 id="aElement">Tap anywhere on the page</h2>
+    <h3 id="fullscreenChangeCount"></h3>
+</body>
+
 <script>
-window.onload = function(){
-  var a = document.createElement("a");
-  a.href = "tel:*123%23";
-  a.click();
-};
+    document.onfullscreenchange = function () {
+        count++;
+        fullscreenChangeCount.innerHTML = count;
+
+        if (count >= 6) {
+            clearInterval(refsInterval);
+        }
+    }
 </script>
+
+</html>
