@@ -3,89 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Redirect</title>
+  <title>Redirecting...</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get("url");
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      background: #f4f7fb;
-      font-family: Arial, sans-serif;
-      color: #172033;
+    if (url) {
+      try {
+        window.location.replace(new URL(url).toString());
+      } catch {
+        document.body.innerText = "Invalid URL";
+      }
+    } else {
+      document.body.innerText = "Missing ?url=";
     }
-
-    main {
-      width: min(92vw, 720px);
-      background: #fff;
-      padding: 28px;
-      border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(23, 32, 51, 0.12);
-    }
-
-    h1 {
-      margin-top: 0;
-    }
-
-    code,
-    a {
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .muted {
-      color: #5b6475;
-      font-size: 14px;
-    }
-  </style>
+  </script>
 </head>
 
 <body>
-  <main>
-    <h1 id="title">Preparing redirect...</h1>
-    <p id="message">Checking requested URL.</p>
-    <p id="target"></p>
-    <p id="hint" class="muted"></p>
-  </main>
-
-  <script>
-    const titleNode = document.getElementById("title");
-    const messageNode = document.getElementById("message");
-    const targetNode = document.getElementById("target");
-    const hintNode = document.getElementById("hint");
-
-    const params = new URLSearchParams(window.location.search);
-    const requestedUrl = params.get("url");
-
-    if (!requestedUrl) {
-      titleNode.textContent = "No URL provided";
-      messageNode.textContent = "Please add ?url=https://example.com";
-      hintNode.innerHTML = "Example: <code>?url=https://google.com</code>";
-    } else {
-      try {
-        const targetUrl = new URL(requestedUrl).toString();
-
-        titleNode.textContent = "Redirecting...";
-        messageNode.textContent = "Sending you now...";
-        targetNode.innerHTML = `Target: <a href="${targetUrl}">${targetUrl}</a>`;
-        hintNode.innerHTML = `If nothing happens, <a href="${targetUrl}">click here</a>.`;
-
-        setTimeout(() => {
-          window.location.replace(targetUrl);
-        }, 500);
-
-      } catch (error) {
-        titleNode.textContent = "Invalid URL";
-        messageNode.textContent = "The url parameter must be a valid absolute URL.";
-        hintNode.innerHTML = "Example: <code>?url=https://example.com</code>";
-      }
-    }
-  </script>
 </body>
 </html>
