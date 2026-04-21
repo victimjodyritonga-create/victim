@@ -1,26 +1,18 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Redirecting...</title>
+<style>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const url = params.get("url");
-
-    if (url) {
-      try {
-        window.location.replace(new URL(url).toString());
-      } catch {
-        document.body.innerText = "Invalid URL";
-      }
-    } else {
-      document.body.innerText = "Missing ?url=";
-    }
-  </script>
+select, optgroup {transform: scale(500, 10);}
+html, body {overflow: hidden;}
+</style>
 </head>
+<body id='body'>
 
-<body>
+<select multiple>
+    <optgroup>
+    </optgroup>
+</select>
+
 </body>
 </html>
