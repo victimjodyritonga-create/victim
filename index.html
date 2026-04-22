@@ -1,1 +1,23 @@
-<embed src="https://pocwebtesting123.github.io/TestingWeb/"></embed>
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; height: 100%; }
+  .inside { height: 100%; background: #c9e7ff; display:grid; place-items:center; font: 700 16px system-ui; }
+  .escape {
+    position: fixed;
+    left: 0;
+    top: 240px;
+    width: 100vw;
+    height: 60px;
+    background: rgba(0, 180, 0, 0.85);
+    color: #fff;
+    display:grid;
+    place-items:center;
+    z-index: 2147483647;
+    font: 700 14px system-ui;
+  }
+</style>
+<div class="inside">Child frame</div>
+<div class="escape">IF THIS IS VISIBLE OUTSIDE FRAME => BUG</div>
+</html>
