@@ -1,1 +1,23 @@
-
+<!doctype html>
+<meta charset="utf-8">
+<title>clipboard iframe child</title>
+<style>body { font: 18px system-ui, sans-serif; margin: 20px; } button { font: inherit; padding: 16px 24px; }</style>
+<button id="read" autofocus>Read clipboard</button>
+<h2>clipboard iframe child</h2>
+<p id="origin"></p>
+<script>
+document.getElementById('origin').textContent = location.origin;
+async function run() {
+  parent.postMessage({event: 'child requesting clipboard', origin: location.origin}, '*');
+  try {
+    const text = await navigator.clipboard.readText();
+    parent.postMessage({event: 'child clipboard resolved', length: text.length, origin: location.origin}, '*');
+  } catch (err) {
+    parent.postMessage({event: 'child clipboard error', name: err.name, message: err.message, origin: location.origin}, '*');
+  }
+}
+window.addEventListener('message', event => {
+  if (event.data && event.data.cmd === 'clipboard') run();
+});
+document.getElementById('read').onclick = run;
+</script>
