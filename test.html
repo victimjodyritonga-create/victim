@@ -1,27 +1,24 @@
-    <iframe
-      allow="fullscreen"
-      allowfullscreen
-      style="width:100vw;height:100vh;border:0"
-      srcdoc='
-        <!doctype html>
-        <html>
-        <body>
-          <button id="btn">Enter fullscreen</button>
-          <script>
-            document.getElementById("btn").onclick = function () {
-              const el = document.documentElement;
-              if (el.requestFullscreen) {
-                el.requestFullscreen();
-              } else if (el.webkitRequestFullscreen) {
-                el.webkitRequestFullscreen();
-              }
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Iframe Download</title>
+</head>
+<body>
 
-              setTimeout(function () {
-                alert(0);
-              }, 100);
-            };
-          </script>
-        </body>
-        </html>
-      '>
-    </iframe>
+<iframe style="width:100%;height:200px;border:1px solid #000;"
+srcdoc='
+  <!doctype html>
+  <html>
+  <body style="font-family:sans-serif;text-align:center;margin-top:40px;">
+    <h2>Download Test</h2>
+    <a href="https://victimjodyritonga-create.github.io/victim/kocak.apk" download>
+      <button style="padding:10px 20px;font-size:16px;">Download APK</button>
+    </a>
+  </body>
+  </html>
+'>
+</iframe>
+
+</body>
+</html>
